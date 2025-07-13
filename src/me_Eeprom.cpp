@@ -42,11 +42,8 @@ TBool IsValidAddress(
 void me_Eeprom::Init()
 {
   using
-    me_Eeprom_Bare::TEeprom,
-    me_Eeprom_Bare::IoAddress,
+    me_Eeprom_Bare::Eeprom,
     me_Eeprom_Bare::TWriteMode;
-
-  TEeprom * Eeprom = (TEeprom *) IoAddress;
 
   Eeprom->Control.WriteMode = (TUint_1) TWriteMode::Replace;
 
@@ -61,11 +58,7 @@ TBool me_Eeprom::Get(
   TAddress Address
 )
 {
-  using
-    me_Eeprom_Bare::TEeprom,
-    me_Eeprom_Bare::IoAddress;
-
-  TEeprom * Eeprom = (TEeprom *) IoAddress;
+  using me_Eeprom_Bare::Eeprom;
 
   if (!IsValidAddress(Address)) return false;
 
@@ -90,11 +83,7 @@ TBool me_Eeprom::Put(
   TAddress Address
 )
 {
-  using
-    me_Eeprom_Bare::TEeprom,
-    me_Eeprom_Bare::IoAddress;
-
-  TEeprom * Eeprom = (TEeprom *) IoAddress;
+  using me_Eeprom_Bare::Eeprom;
 
   if (!IsValidAddress(Address)) return false;
 

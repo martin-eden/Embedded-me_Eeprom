@@ -42,8 +42,8 @@ namespace me_Eeprom_Bare
     TUint_1 : 6;
   };
 
-  // Address where to apply layout
-  const TAddress IoAddress = 63;
+  // Mapping layout to address
+  TEeprom * Eeprom = (TEeprom *) 63;
 }
 
 /*
