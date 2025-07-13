@@ -1,0 +1,43 @@
+EEPROM implementation after-thoughts
+
+1
+
+Register mapping is relatively sane
+
+  Control
+  Data
+  Address
+
+Workflow is that we're setting (Address) and (Data) (if we want to write)
+and then touching read or write bit in (Control).
+
+(Control) has weird bit 2 aka EEMPE. We need to set it along with "normal"
+write bit 1 aka EEPE. I called that bit 2 "Going to write. Seriously".
+
+2
+
+Writing featurism
+
+Just writing byte is too boring! Designer created three write modes:
+
+  (Replace)
+  (Set to 0xFF)
+  (Only write zero bits)
+
+And also introduced two-bit setting for this in (Control).
+
+I can not easily imagine use case of (Only write zero bits).
+
+3
+
+Timings
+
+Reading is instant, writing is thousands times slower.
+
+According to datasheet (Replace) needs 3.4 ms per byte,
+(Set to 0xFF) and that weird mode need 1.8 ms.
+
+Stated storage endurance is 100K.
+
+
+2025-07-13
