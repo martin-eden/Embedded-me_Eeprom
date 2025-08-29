@@ -2,37 +2,37 @@
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-07-13
+  Last mod.: 2025-08-29
 */
 
 /*
   Test reads and modifies EEPROM.
 
-  In my Linux setup board is reset after ~3 seconds after opening.
-  For that three seconds is starts to write new values to EEPROM
-  but can not finish em all. So data map is jagged.
+  In my Linux setup, board is reset after ~3 seconds after opening.
+
+  To avoid being reset when writing data, we're waiting 5 seconds
+  after startup.
 */
 
-#include <me_BaseTypes.h>
-#include <me_Uart.h>
-#include <me_Console.h>
-
 #include <me_Eeprom.h>
+
+#include <me_BaseTypes.h>
+#include <me_Console.h>
+#include <me_Delays.h>
 
 /*
   Print EEPROM contents. Helper function
 */
 void PrintEeprom()
 {
-  using namespace me_Eeprom;
-
   Console.Print("( Reading");
 
-  for (TAddress Addr = MinAddress; Addr <= MaxAddress; ++Addr)
+  for (TAddress Addr = 0; Addr <= TAddress_Max; ++Addr)
   {
     TUnit Byte;
 
-    if (!Get(&Byte, Addr)) break;
+    if (!me_Eeprom::Get(&Byte, Addr))
+      break;
 
     Console.Print(Byte);
   }
@@ -41,17 +41,19 @@ void PrintEeprom()
 }
 
 /*
-  Zero EEPROM contents
+  Fill EEPROM with given value
 */
-void ClearEeprom()
+void FillEeprom(
+  TUint_1 Value
+)
 {
-  using namespace me_Eeprom;
+  Console.Write("( Filling with");
+  Console.Print(Value);
 
-  Console.Write("( Clearing ");
-
-  for (TAddress Addr = MinAddress; Addr <= MaxAddress; ++Addr)
+  for (TAddress Addr = 0; Addr <= TAddress_Max; ++Addr)
   {
-    if (!Put(0xFF, Addr)) break;
+    if (!me_Eeprom::Put(Value, Addr))
+      break;
   }
 
   Console.Write(")");
@@ -66,39 +68,23 @@ void ClearEeprom()
 */
 void RunTest()
 {
-  ClearEeprom();
+  me_Eeprom::Init();
 
+  FillEeprom(1);
   PrintEeprom();
 
-  //*
-  using namespace me_Eeprom;
-
-  // ( Read, modify, write, print
-
-  Console.Write("( Writing ");
-
-  for (TAddress Addr = MinAddress; Addr <= MaxAddress; ++Addr)
-  {
-    TUnit Byte;
-    if (!Get(&Byte, Addr)) break;
-    ++Byte;
-    if (!Put(Byte, Addr)) break;
-  }
-
-  Console.Write(")");
-  Console.EndLine();
-
+  FillEeprom(2);
   PrintEeprom();
 
-  // )
-
-  //*/
+  FillEeprom(TUint_1_Max);
+  PrintEeprom();
 }
 
 void setup()
 {
-  me_Uart::Init(me_Uart::Speed_115k_Bps);
-  me_Eeprom::Init();
+  me_Delays::Delay_S(5);
+
+  Console.Init();
 
   Console.Print("[me_Eeprom] test.");
 

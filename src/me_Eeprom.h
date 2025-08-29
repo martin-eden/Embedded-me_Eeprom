@@ -1,8 +1,8 @@
-// EEPROM read-write
+// EEPROM memory access
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-07-13
+  Last mod.: 2025-08-29
 */
 
 #pragma once
@@ -11,14 +11,6 @@
 
 namespace me_Eeprom
 {
-  // ( Capacity and span constants
-  const TUint_2 Size = 1024;
-
-  const TAddress
-    MinAddress = 0,
-    MaxAddress = Size - 1;
-  // )
-
   // Initialize. Optional
   void Init();
 
@@ -32,4 +24,5 @@ namespace me_Eeprom
 /*
   2025-07-12
   2025-07-13
+  2025-08-29
 */

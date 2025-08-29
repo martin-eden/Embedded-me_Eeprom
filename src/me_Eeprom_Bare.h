@@ -40,6 +40,7 @@ namespace me_Eeprom_Bare
     // 3 Address
     TUint_2 Address : 10;
     TUint_1 : 6;
+    // 5 --
   };
 
   // Mapping layout to address

@@ -2,30 +2,27 @@
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-07-12
+  Last mod.: 2025-08-29
 */
 
 #include <me_Eeprom.h>
 
 #include <me_Eeprom_Bare.h>
+
 #include <avr/interrupt.h> // for cli()
 
 using namespace me_Eeprom;
 
+const TAddress MaxAddress = 1024 - 1;
+
 /*
-  Helper. Check that address makes sense
+  [Internal] Check that address makes sense
 */
 TBool IsValidAddress(
   TAddress Address
 )
 {
-  // ( Min address is 0, so address can't physically be less
-  // if (Address < MinAddress) return false;
-  // )
-
-  if (Address > MaxAddress) return false;
-
-  return true;
+  return (Address <= MaxAddress);
 }
 
 /*
@@ -109,4 +106,5 @@ TBool me_Eeprom::Put(
 /*
   2025-07-12
   2025-07-13
+  2025-08-29
 */
