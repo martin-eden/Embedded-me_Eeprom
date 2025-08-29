@@ -35,9 +35,11 @@ Timings
 Reading is instant, writing is thousands times slower.
 
 According to datasheet (Replace) needs 3.4 ms per byte,
-(Set to 0xFF) and that weird mode need 1.8 ms.
+(Set to 0xFF) and (Only write zero bits) need 1.8 ms.
+
+That's like 3.5 seconds for full write.
 
 Stated storage endurance is 100K.
 
 
-2025-07-13
+2025-07-13, 2025-08-29
