@@ -35,7 +35,7 @@ TBool IsValidAddress(
   zero-saturating it. Also we're disabling interrupt signal when
   EEPROM is available.
 
-  After reset write mode is correct. And interrupt is disabled.
+  After reset, write mode is correct. And interrupt is disabled.
   Only case of calling this routine if someone else has changed
   that settings.
 */
