@@ -27,12 +27,14 @@ TBool IsValidAddress(
 
 /*
   Initialize
-
-  We don't have to do anything here for now.
-  This method is design placeholder.
 */
 void me_Eeprom::Init()
 {
+  using
+    me_Eeprom_Bare::Eeprom,
+    me_Eeprom_Bare::TWriteMode;
+
+  Eeprom->Control.WriteMode = (TUint_1) TWriteMode::Replace;
 }
 
 /*
