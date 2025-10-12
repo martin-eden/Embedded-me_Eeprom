@@ -2,7 +2,7 @@
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-07-13
+  Last mod.: 2025-10-12
 */
 
 #pragma once
@@ -22,12 +22,12 @@ namespace me_Eeprom_Bare
   // Control/State panel
   struct TControl
   {
-    volatile TBool IsReading : 1;
-    volatile TBool IsWriting : 1;
-    TBool GoingToWriteSeriously : 1;
-    TBool EnableIdleSignal : 1;
-    TUint_1 WriteMode : 2;
-    TUint_1 : 2;
+    volatile TBool IsReading : 1;    // 1
+    volatile TBool IsWriting : 1;    // 2
+    TBool GoingToWriteSeriously : 1; // 3
+    TBool EnableIdleSignal : 1;      // 4
+    TUint_1 WriteMode : 2;           // 5 6
+    TUint_1 : 2;                     // 7 8
   };
 
   // EEPROM layout
@@ -37,7 +37,7 @@ namespace me_Eeprom_Bare
     TControl Control;
     // 2 Data
     TUint_1 Data;
-    // 3 Address
+    // 3 4 Address
     TUint_2 Address : 10;
     TUint_1 : 6;
     // 5 --

@@ -2,7 +2,7 @@
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-08-29
+  Last mod.: 2025-10-12
 */
 
 #include <me_Eeprom.h>
@@ -26,25 +26,13 @@ TBool IsValidAddress(
 }
 
 /*
-  Initialize. Optional
+  Initialize
 
-  We're making sure that writes really write data, not erasing or
-  zero-saturating it. Also we're disabling interrupt signal when
-  EEPROM is available.
-
-  After reset, write mode is correct. And interrupt is disabled.
-  Only case of calling this routine if someone else has changed
-  that settings.
+  We don't have to do anything here for now.
+  This method is design placeholder.
 */
 void me_Eeprom::Init()
 {
-  using
-    me_Eeprom_Bare::Eeprom,
-    me_Eeprom_Bare::TWriteMode;
-
-  Eeprom->Control.WriteMode = (TUint_1) TWriteMode::Replace;
-
-  Eeprom->Control.EnableIdleSignal = false;
 }
 
 /*
@@ -57,7 +45,8 @@ TBool me_Eeprom::Get(
 {
   using me_Eeprom_Bare::Eeprom;
 
-  if (!IsValidAddress(Address)) return false;
+  if (!IsValidAddress(Address))
+    return false;
 
   while (Eeprom->Control.IsWriting);
 
@@ -82,7 +71,8 @@ TBool me_Eeprom::Put(
 {
   using me_Eeprom_Bare::Eeprom;
 
-  if (!IsValidAddress(Address)) return false;
+  if (!IsValidAddress(Address))
+    return false;
 
   while (Eeprom->Control.IsWriting);
 
