@@ -2,7 +2,7 @@
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-10-12
+  Last mod.: 2025-11-18
 */
 
 #include <me_Eeprom.h>
@@ -13,15 +13,15 @@
 
 using namespace me_Eeprom;
 
-const TAddress MaxAddress = 1024 - 1;
-
 /*
   [Internal] Check that address makes sense
 */
-TBool IsValidAddress(
+static TBool IsValidAddress(
   TAddress Address
 )
 {
+  const TAddress MaxAddress = 1024 - 1;
+
   return (Address <= MaxAddress);
 }
 

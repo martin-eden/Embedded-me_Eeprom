@@ -2,7 +2,7 @@
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-10-12
+  Last mod.: 2025-11-18
 */
 
 #pragma once
@@ -33,7 +33,7 @@ namespace me_Eeprom_Bare
   // EEPROM layout
   struct TEeprom
   {
-    // 1 Panel
+    // 1 Control
     TControl Control;
     // 2 Data
     TUint_1 Data;
