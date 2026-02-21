@@ -2,14 +2,13 @@
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-11-18
+  Last mod.: 2026-02-21
 */
 
 #include <me_Eeprom.h>
 
 #include <me_Eeprom_Bare.h>
-
-#include <avr/interrupt.h> // for cli()
+#include <me_Interrupts.h>
 
 using namespace me_Eeprom;
 
@@ -82,13 +81,12 @@ TBool me_Eeprom::Put(
 
   Eeprom->Data = Data;
 
-  TUnit OrigSreg = SREG;
-  cli();
+  {
+    me_Interrupts::TInterruptsDisabler NoInts;
 
-  Eeprom->Control.GoingToWriteSeriously = true;
-  Eeprom->Control.IsWriting = true;
-
-  SREG = OrigSreg;
+    Eeprom->Control.GoingToWriteSeriously = true;
+    Eeprom->Control.IsWriting = true;
+  }
 
   while (Eeprom->Control.IsWriting);
 
