@@ -11,11 +11,8 @@
 
 namespace me_Eeprom
 {
-  // Initialize. Optional
   void Init();
-  // Read byte
   TBool Get(TUnit * Data, TAddress Address);
-  // Write byte
   TBool Put(TUnit Data, TAddress Address);
 
   namespace Description
