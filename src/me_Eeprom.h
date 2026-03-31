@@ -17,7 +17,9 @@ namespace me_Eeprom
 
   namespace Description
   {
-    const TAddress MaxAddress = 1024 - 1;
+    const TUint_2 Size = 1024;
+    const TAddress MaxAddress = Size - 1;
+    const TAddressSegment Segment = { .Addr = 0, .Size = Size };
 
     TBool IsValidAddress(TAddress);
   }
