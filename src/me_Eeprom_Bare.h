@@ -2,7 +2,7 @@
 
 /*
   Author: Martin Eden
-  Last mod.: 2025-11-18
+  Last mod.: 2026-03-31
 */
 
 #pragma once
@@ -43,8 +43,8 @@ namespace me_Eeprom_Bare
     // 5 --
   };
 
-  // Mapping layout to address
-  TEeprom * Eeprom = (TEeprom *) 63;
+  // Link to layout address
+  extern TEeprom * Eeprom;
 }
 
 /*
